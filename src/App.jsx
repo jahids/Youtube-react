@@ -1,16 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import getPlayList from "./api";
 
 const App = () => {
-  useEffect(() => {
-    getPlayList("PL_XxuZqN0xVDr08QgQHljCecWtA4jBLnS").then((res) =>
-      console.log(res)
-    );
-  }, []);
+ 
+
+  getVideoplaylist("PL_XxuZqN0xVDr08QgQHljCecWtA4jBLnS");
+
+  console.log(state);
+
+  // useEffect(() => {
+  //   getPlayList("PL_XxuZqN0xVDr08QgQHljCecWtA4jBLnS").then((res) =>
+  //     console.log("inner", res)
+  //   );
+  // }, []);
+
+  // console.log(data.fav);
 
   return (
     <div>
-      <h1>hello world</h1>
+      <h1>hello world{data}</h1>
     </div>
   );
 };
