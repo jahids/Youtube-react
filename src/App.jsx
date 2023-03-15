@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from "react";
-import getPlayList from "./api";
+import { useEffect } from "react";
+import usePlaylists from "./hooks/usePlaylists";
 
 const App = () => {
- 
+  const { getPlaylistById, playlists } = usePlaylists();
 
-  getVideoplaylist("PL_XxuZqN0xVDr08QgQHljCecWtA4jBLnS");
+  useEffect(() => {
+    getPlaylistById("PL_XxuZqN0xVD0op-QDEgyXFA4fRPChvkl");
+  }, []);
 
-  console.log(state);
+  console.log("Playlist", playlists);
 
-  // useEffect(() => {
-  //   getPlayList("PL_XxuZqN0xVDr08QgQHljCecWtA4jBLnS").then((res) =>
-  //     console.log("inner", res)
-  //   );
-  // }, []);
-
-  // console.log(data.fav);
-
-  return (
-    <div>
-      <h1>hello world{data}</h1>
-    </div>
-  );
+  return <div>App</div>;
 };
 
 export default App;
