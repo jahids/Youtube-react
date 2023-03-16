@@ -1,6 +1,6 @@
 import { useState } from "react";
 import getPlaylist from "../api";
-
+      
 const usePlaylists = () => {
   const [state, setState] = useState({
     playlists: {},
@@ -8,15 +8,28 @@ const usePlaylists = () => {
     favorites: [],
   });
 
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const getPlaylistById = async (playlistId, force = false) => {
     if (state.playlists[playlistId] && !force) {
       return;
+    }               
+
+    setLoading(true);
+
+    let result;
+    try {
+      result = await getPlaylist(playlistId);
+      setError("");
+    } catch (error) {
+      setError(error.response?.data?.error?.message || "something went wrong");
+    } finally {
+      // best practice use loading finally block
+      setLoading(false);
     }
 
-    let result = await getPlaylist(playlistId);
-
     let cid, ct;
-
     result = result.map((item) => {
       const {
         channelId,
@@ -78,6 +91,8 @@ const usePlaylists = () => {
     playlists: state.playlists,
     favorites: getPlaylistsByIds(state.favorites),
     recentPlaylists: getPlaylistsByIds(state.recentPlaylists),
+    error,
+    loading,
     getPlaylistById,
     addToRecent,
     addToFavorites,
