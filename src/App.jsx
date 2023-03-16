@@ -5,9 +5,9 @@ import Navbar from "./Component/navbar";
 
 const App = () => {
   const { getPlaylistById, playlists, error, loading } = usePlaylists();
-  useEffect(() => {
-    getPlaylistById("PL_XxuZqN0xVD0op-QDEgyXFA4fRPChvkl");
-  }, []);
+  // useEffect(() => {
+  //   getPlaylistById("PL_XxuZqN0xVD0op-QDEgyXFA4fRPChvkl");
+  // }, []);
 
   console.log("Playlist from hook app", playlists);
   console.log(loading);
@@ -16,7 +16,7 @@ const App = () => {
   return (
     <>
       <CssBaseline>
-        <Navbar />
+        <Navbar getPlaylistById={getPlaylistById} />
       </CssBaseline>
     </>
   );

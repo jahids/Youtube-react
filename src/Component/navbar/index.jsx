@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,20 +13,43 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import PlaylistForm from "../playlist-form";
 
-export default function Navbar() {
+export default function Navbar({ getPlaylistById }) {
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const getPlaylistId = (playlistId) => {
+    // console.log(playlistId);
+    getPlaylistById(playlistId);
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="default" sx={{ py: 2 }}>
-        <Toolbar>
-          <Container maxWidth="lg">
-            <Stack spacing={2}>
+        <Container maxWidth="lg">
+          <Toolbar>
+            <Stack spacing={2} sx={{ flexGrow: 1 }}>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Testing api
               </Typography>
             </Stack>
-          </Container>
-        </Toolbar>
+            <Button onClick={handleClickOpen} variant="contained">
+              Add playlist
+            </Button>
+            <PlaylistForm
+              open={open}
+              handleClose={handleClose}
+              getPlaylistId={getPlaylistId}
+            />
+          </Toolbar>
+        </Container>
       </AppBar>
     </Box>
   );
