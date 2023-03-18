@@ -1,23 +1,15 @@
-import { useState } from "react";
+import { Button, Stack } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import { Container } from "@mui/system";
+import { useState } from "react";
 import PlaylistForm from "../playlist-form";
 
-export default function Navbar({ getPlaylistById }) {
+const Navbar = ({ getPlaylistById }) => {
   const [open, setOpen] = useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -27,21 +19,20 @@ export default function Navbar({ getPlaylistById }) {
   };
 
   const getPlaylistId = (playlistId) => {
-    // console.log(playlistId);
     getPlaylistById(playlistId);
   };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="default" sx={{ py: 2 }}>
-        <Container maxWidth="lg">
+      <AppBar position="fixed" color="default" sx={{ py: 2 }}>
+        <Container maxWidth={"lg"}>
           <Toolbar>
-            <Stack spacing={2} sx={{ flexGrow: 1 }}>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Testing api
-              </Typography>
+            <Stack sx={{ flexGrow: 1 }}>
+              <Typography variant="h4">Api Testing..</Typography>
+              <Typography variant="body1">api</Typography>
             </Stack>
-            <Button onClick={handleClickOpen} variant="contained">
-              Add playlist
+            <Button variant="contained" onClick={handleClickOpen}>
+              Add Playlist
             </Button>
             <PlaylistForm
               open={open}
@@ -53,4 +44,6 @@ export default function Navbar({ getPlaylistById }) {
       </AppBar>
     </Box>
   );
-}
+};
+
+export default Navbar;

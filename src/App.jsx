@@ -1,23 +1,38 @@
-import { useEffect } from "react";
-import usePlaylists from "./hooks/usePlaylists";
+import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import { Container } from "@mui/system";
 import Navbar from "./Component/navbar";
+import PlaylistCardItem from "./Component/playlist-card-item";
+import usePlaylists from "./hooks/useplaylists";
 
 const App = () => {
-  const { getPlaylistById, playlists, error, loading } = usePlaylists();
-  // useEffect(() => {
-  //   getPlaylistById("PL_XxuZqN0xVD0op-QDEgyXFA4fRPChvkl");
-  // }, []);
+  const { playlists, error, getPlaylistById } = usePlaylists();
 
-  console.log("Playlist from hook app", playlists);
-  console.log(loading);
+  const playlistArray = Object.values(playlists);
+
+  console.log(playlists);
   console.log(error);
 
   return (
     <>
-      <CssBaseline>
+      <CssBaseline />
+      <Container maxWidth={"lg"} sx={{ my: 16 }}>
         <Navbar getPlaylistById={getPlaylistById} />
-      </CssBaseline>
+        {playlistArray.length > 0 && (
+          <Grid container alignItems="stretch">
+            {playlistArray.map((item) => (
+              <Grid item xs={12} md={6} lg={4} mb={2}>
+                <PlaylistCardItem
+                  key={item.id}
+                  playlistThumbnail={item.playlistThumbnail}
+                  playlistTitle={item.playlistTitle}
+                  channelTitle={item.channelTitle}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </Container>
     </>
   );
 };
