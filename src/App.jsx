@@ -10,8 +10,8 @@ const App = () => {
 
   const playlistArray = Object.values(playlists);
 
-  console.log(playlists);
-  console.log(error);
+  // console.log(playlists);
+  // console.log(error);
 
   return (
     <>
